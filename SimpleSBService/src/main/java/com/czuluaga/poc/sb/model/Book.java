@@ -39,6 +39,11 @@ public class Book {
 	public void setStars(int stars) {
 		this.stars = stars;
 	}
+	@Override
+	public String toString() {
+		return "Book [name=" + name + ", author=" + author + ", publishDate=" + publishDate + ", isbn=" + isbn
+				+ ", stars=" + stars + "]";
+	}
 	
 	
 	
