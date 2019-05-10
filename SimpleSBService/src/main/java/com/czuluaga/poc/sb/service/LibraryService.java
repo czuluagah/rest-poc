@@ -41,8 +41,8 @@ public class LibraryService {
 		
 		Book book1 = new Book();
 		book1.setAuthor("J.R.R Tolkien");
-		book1.setName("The Fellowship of the ring");
-		book1.setIsbn("asdf-lkqwe-1203");
+		book1.setName("Return of the King");
+		book1.setIsbn("asdf-lkqwe-eq03");
 		book1.setStars(3);
 		
 		Book book4 = new Book();
