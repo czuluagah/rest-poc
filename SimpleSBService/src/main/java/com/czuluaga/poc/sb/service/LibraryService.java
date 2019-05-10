@@ -2,6 +2,7 @@ package com.czuluaga.poc.sb.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -16,7 +17,7 @@ public class LibraryService {
 	private LibraryService () {}
 	private final static List<Book> books = new ArrayList<>();
 	
-	private static LibraryService getInstance() {
+	public static LibraryService getInstance() {
 		if(instance  == null) {
 			instance = new LibraryService();
 			loadInitialData();
@@ -44,6 +45,30 @@ public class LibraryService {
 		book1.setIsbn("asdf-lkqwe-1203");
 		book1.setStars(3);
 		
+		Book book4 = new Book();
+		book4.setAuthor("J.R.R Tolkien");
+		book4.setName("The Hobbit");
+		book4.setIsbn("asdf-lkqwe-1203");
+		book4.setStars(4);
+		
+		Book book3 = new Book();
+		book3.setAuthor("J.R.R Tolkien");
+		book3.setName("The Fellowship of the ring");
+		book3.setIsbn("asdf-lkqwe-1203");
+		book3.setStars(5);
+		
+		Book book5 = new Book();
+		book5.setAuthor("J.R.R Tolkien");
+		book5.setName("The Silmarillion");
+		book5.setIsbn("0-04-823139-8");
+		book5.setStars(5);
+		
+		Book book6 = new Book();
+		book6.setAuthor("J.R.R Tolkien");
+		book6.setName("Two Towers");
+		book6.setIsbn("	936070");
+		book6.setStars(5);
+		
 		Book book2 = new Book();
 		book2.setAuthor("George R.R Martin");
 		book2.setName("Game of Thrones");
@@ -53,16 +78,19 @@ public class LibraryService {
 		books.add(book);
 		books.add(book1);
 		books.add(book2);
+		books.add(book3);
+		books.add(book4);
+		books.add(book5);
+		books.add(book6);
 	}
 	
 	
-	public List<Book> findBooksByStarts(int starts){
-		return this.getInstance().getBooks().stream().filter( (qualification) -> (qualification.getStars() >= starts))
-											  .collect(Collectors.toList());
+	public List<Book> find(String filter, IFindBook<Book,List<Book>> functional){
+		return functional.find(this.getInstance().getBooks(), filter);
 	}
 	
-	public Book findByIsbn(String isbn, IFindBook<Book,Optional<Book>> functional) {
-		Optional<Book> book = functional.find(this.getInstance().getBooks(), isbn);
+	public Book findOne(String filter, IFindBook<Book,Optional<Book>> functional) {
+		Optional<Book> book = functional.find(this.getInstance().getBooks(), filter);
 		return book.get();
 	}
 }

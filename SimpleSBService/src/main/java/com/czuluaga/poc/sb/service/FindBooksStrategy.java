@@ -12,7 +12,14 @@ public class FindBooksStrategy {
 																				   .filter( object -> pFilter.equals(object.getIsbn() ))
 																				   .findFirst();
 	
+	public static final IFindBook<Book, Optional<Book>> byName = (toFilter, pFilter) -> toFilter.stream()
+			   .filter( object -> pFilter.equals(object.getName() ))
+			   .findFirst();
 	
-	public static final IFindBook<Book, List<Book>> byStarts = (toFilter, pFilter) -> toFilter.stream()
-			   .filter( object -> pFilter.equals(object.getIsbn() )).collect(Collectors.toList());
+	
+	public static final IFindBook<Book, List<Book>> byAuthor = (toFilter, pFilter) -> toFilter.stream()
+			   .filter( object -> pFilter.equals(object.getAuthor() )).collect(Collectors.toList());
+	
+	public static final IFindBook<Book, List<Book>> byStars = (toFilter, pFilter) -> toFilter.stream()
+			   .filter( object -> pFilter.equals(object.getStars() )).collect(Collectors.toList());
 }
